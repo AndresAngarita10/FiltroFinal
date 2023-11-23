@@ -45,8 +45,8 @@ public class ClienteRepository : GenericRepoInt<Cliente>, ICliente
         .Select(c => new
         {
             c.NombreCliente,
-            pedido = c.Pedidos.Count()
-        }).OrderBy(c => c.pedido).ToListAsync();
+            Numpedidos = c.Pedidos.Count()
+        }).OrderBy(c => c.Numpedidos).ToListAsync();
     }
 
     public async Task<IEnumerable<object>> ClientesConRepresentanteDeVentas8()

@@ -35,6 +35,15 @@ public class EmpleadoController : BaseApiController
         var entidad = await unitofwork.Empleados.EmpleadosSinOficinaConClientesCompraronFrutales3();
         return mapper.Map<List<object>>(entidad);
     }
+    
+    [HttpGet("consulta9")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<object>>> EmpleadosSinClientesYsusjefes9()
+    {
+        var entidad = await unitofwork.Empleados.EmpleadosSinClientesYsusjefes9();
+        return mapper.Map<List<object>>(entidad);
+    }
 
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]

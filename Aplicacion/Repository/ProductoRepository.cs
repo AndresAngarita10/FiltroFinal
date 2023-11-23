@@ -42,7 +42,7 @@ public class ProductoRepository : GenericRepoStr<Producto>, IProducto
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<object>> ProductosMasVendidos5()
+    public async Task<IEnumerable<object>> ProductosMayorVentas5()
     {
         return await _context.DetallePedidos
            .GroupBy(detalle => detalle.CodigoProducto)
@@ -69,5 +69,20 @@ public class ProductoRepository : GenericRepoStr<Producto>, IProducto
                TotalUnVendidas = producto.Sum(detalle => detalle.Cantidad),
            }).OrderByDescending(p => p.TotalUnVendidas).FirstOrDefaultAsync();
     }
+
+
+    public async Task<IEnumerable<object>> ProductosSinPedidos10()
+    {
+        return await _context.Productos
+            .Where(p => !p.DetallePedidos.Any())
+            .Select(p => new
+            {
+                NombreProducto = p.Nombre,
+                Descripcion = p.Descripcion,
+                Imagen = p.GamaProducto.Imagen
+            })
+            .ToListAsync();
+    }
+
 
 }

@@ -42,5 +42,19 @@ public class EmpleadoRepository: GenericRepoInt<Empleado>, IEmpleado
     
             return oficinas;
         }
+
+    public async Task<IEnumerable<object>> EmpleadosSinClientesYsusjefes9()
+    {
+        return await _context.Empleados
+        .Where(e => !e.Clientes.Any())
+        .Select(e => new 
+        {
+            NombreEmpleado = e.Nombre,
+            ApelldioEmpleado = e.Apellido1,
+            Apelldio2Empleado = e.Apellido2,
+            ExtensionEmpleado = e.Extension,
+            Jefe = e.Jefe.Nombre
+        }).ToListAsync();
+    }
     
 }
